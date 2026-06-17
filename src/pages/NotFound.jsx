@@ -77,7 +77,7 @@ export default function NotFound() {
       pulse = 1;
       for (const b of bodies) {
         const ang = Math.atan2(b.y - cy, b.x - cx) + rand(-0.3, 0.3);
-        const sp = rand(380, 760);
+        const sp = rand(180, 340);
         b.vx = Math.cos(ang) * sp;
         b.vy = Math.sin(ang) * sp;
         b.alpha = 1;
@@ -201,10 +201,7 @@ export default function NotFound() {
           size *= fade;
         }
 
-        const off = b.x < -80 || b.x > W + 80 || b.y < -80 || b.y > H + 80;
-
-        if (dist <= CORE_R || b.alpha <= 0.01 || off) {
-          if (bodies.length > COUNT) { bodies.splice(i, 1); i--; continue; }
+        if (dist <= CORE_R || b.alpha <= 0.01) {
           bodies[i] = spawn();
           continue;
         }
@@ -251,7 +248,7 @@ export default function NotFound() {
 const wrap = {
   position: "relative",
   width: "100%",
-  height: "100vh",
+  height: "100dvh",
   minHeight: 560,
   background: "#FFFFFF",
   overflow: "hidden",
