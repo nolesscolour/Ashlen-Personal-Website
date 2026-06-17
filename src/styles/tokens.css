@@ -1,0 +1,16 @@
+:root {
+  --paper: #ffffff;
+  --ink: #111111;
+  --ink-soft: #8a8a8a;
+  --hair: #ececec;
+  --grid: #f4f4f4;
+  --green: #1f5a3d;
+  --green-bright: #6fbf95; /* readable on ink */
+
+  --col: 720px;
+  --col-wide: 1100px; /* gallery uses a wider measure */
+  --gut: clamp(20px, 5vw, 64px);
+
+  --sans: "DM Sans", system-ui, sans-serif;
+  --mono: "DM Mono", monospace;
+}
