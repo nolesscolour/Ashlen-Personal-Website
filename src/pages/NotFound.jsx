@@ -83,15 +83,7 @@ export default function NotFound() {
         b.alpha = 1;
         b.fadingIn = false;
       }
-      const extra = reduced ? 20 : 60;
-      for (let i = 0; i < extra; i++) {
-        const ang = rand(0, Math.PI * 2);
-        const sp = rand(300, 720);
-        const s = makeShape(cx, cy, Math.cos(ang) * sp, Math.sin(ang) * sp);
-        s.alpha = 1; s.fadingIn = false;
-        bodies.push(s);
-      }
-      if (bodies.length > COUNT * 1.6) bodies.splice(0, bodies.length - Math.floor(COUNT * 1.6));
+      
     };
 
     const onPointer = (e) => {
