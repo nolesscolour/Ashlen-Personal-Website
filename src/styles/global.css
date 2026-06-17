@@ -401,41 +401,36 @@ footer img {
   font-size: 22px;
   line-height: 1;
 }
-.lb-nav {
+.lb-bar {
   position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 56px;
-  height: 56px;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 8px 10px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+}
+.lb-arrow {
+  width: 40px;
+  height: 36px;
   border: 0;
   background: none;
   cursor: pointer;
   color: var(--ink);
-  font-size: 30px;
+  font-size: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.2s;
-  opacity: 0.55;
 }
-.lb-nav:hover {
-  opacity: 1;
-}
-.lb-prev {
-  left: 18px;
-}
-.lb-next {
-  right: 18px;
-}
-.lb-cap {
-  position: fixed;
-  bottom: 26px;
-  left: 0;
-  right: 0;
-  text-align: center;
+.lb-bar-cap {
   font-family: var(--mono);
   font-size: 12px;
   color: var(--ink-soft);
+  min-width: 80px;
+  text-align: center;
 }
 
 @media (prefers-reduced-motion: reduce) {

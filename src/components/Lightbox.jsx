@@ -48,16 +48,6 @@ export default function Lightbox({ items, index, onClose, onPrev, onNext }) {
       <button className="lb-close" onClick={onClose} aria-label="Close">
         ✕
       </button>
-      <button
-        className="lb-nav lb-prev"
-        onClick={(e) => {
-          e.stopPropagation();
-          onPrev();
-        }}
-        aria-label="Previous"
-      >
-        ‹
-      </button>
 
       {cur.src ? (
         <img
@@ -86,18 +76,19 @@ export default function Lightbox({ items, index, onClose, onPrev, onNext }) {
         </div>
       )}
 
-      <button
-        className="lb-nav lb-next"
-        onClick={(e) => {
-          e.stopPropagation();
-          onNext();
-        }}
-        aria-label="Next"
-      >
-        ›
-      </button>
-
-      {cur.caption && <div className="lb-cap">{cur.caption}</div>}
+      <div className="lb-bar" onClick={(e) => e.stopPropagation()}>
+        <button
+          className="lb-arrow"
+          onClick={(e) => { e.stopPropagation(); onPrev(); }}
+          aria-label="Previous"
+        >‹</button>
+        {cur.caption && <span className="lb-bar-cap">{cur.caption}</span>}
+        <button
+          className="lb-arrow"
+          onClick={(e) => { e.stopPropagation(); onNext(); }}
+          aria-label="Next"
+        >›</button>
+      </div>
     </div>
   );
 }
