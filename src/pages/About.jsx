@@ -1,5 +1,6 @@
 import Frame from "../components/Frame";
 import Row from "../components/Row";
+import ContactForm from "../components/ContactForm";
 
 const experience = [
   { year: "2024", role: "Designer", org: "TII" },
@@ -52,12 +53,13 @@ export default function About() {
         </section>
 
         <section className="contact">
-          <div className="line">
+          <div className="line" style={{ marginBottom: "clamp(28px, 4vw, 44px)" }}>
             Say hello.{" "}
             <a className="inline-link" href="mailto:hi@ashlen.studio">
               hi@ashlen.studio
             </a>
           </div>
+          <ContactForm />
         </section>
       </div>
     </>

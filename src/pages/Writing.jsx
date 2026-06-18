@@ -17,7 +17,7 @@ export default function Writing() {
         <section>
           <div className="label">
             <span>
-              Posts<span className="count">{posts.length}</span>
+              Posts
             </span>
           </div>
           {posts.map((p) => (

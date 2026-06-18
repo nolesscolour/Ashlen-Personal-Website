@@ -6,6 +6,7 @@ import Strip from "../components/Strip";
 import Lightbox from "../components/Lightbox";
 import { projects } from "../data/projects";
 import { craft } from "../data/gallery";
+import ContactForm from "../components/ContactForm";
 
 export default function Home() {
   const [lb, setLb] = useState(null);
@@ -37,23 +38,27 @@ export default function Home() {
             product.
           </p>
         </section>
+      </div>
 
-        <section className="set">
+      <section className="set set-wide">
+        <div className="set-inner">
           <div className="label">
             <span>
-              Craft<span className="count">{craft.length}</span>
+              Craft
             </span>
             <Link className="view-all" to="/gallery">
               View all
             </Link>
           </div>
           <Strip items={craft} onOpen={(i) => setLb(i)} />
-        </section>
+        </div>
+      </section>
 
+      <div className="wrap">
         <section className="index">
           <div className="label">
             <span>
-              Projects<span className="count">{projects.length}</span>
+              Projects
             </span>
           </div>
           {projects.map((p) => (
@@ -68,12 +73,13 @@ export default function Home() {
         </section>
 
         <section className="contact">
-          <div className="line">
+          <div className="line" style={{ marginBottom: "clamp(28px, 4vw, 44px)" }}>
             Let's build something for the world.{" "}
             <a className="inline-link" href="mailto:hi@ashlen.studio">
               hi@ashlen.studio
             </a>
           </div>
+          <ContactForm />
         </section>
       </div>
 

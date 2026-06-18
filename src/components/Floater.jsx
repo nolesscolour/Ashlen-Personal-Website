@@ -14,7 +14,6 @@ export default function Floater() {
   }, []);
 
   const toggle = (e) => {
-    // only toggle-on-tap for touch devices; desktop uses hover
     if (window.matchMedia("(hover: none)").matches) {
       setOpen((o) => !o);
       e.stopPropagation();

@@ -19,7 +19,6 @@ export default function Lightbox({ items, index, onClose, onPrev, onNext }) {
   useEffect(() => {
     if (!open) return;
     document.addEventListener("keydown", handleKey);
-    // lock scroll while open
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
@@ -28,7 +27,6 @@ export default function Lightbox({ items, index, onClose, onPrev, onNext }) {
     };
   }, [open, handleKey]);
 
-  // preload neighbours so next/prev is instant
   useEffect(() => {
     if (!open) return;
     [index - 1, index + 1].forEach((i) => {
@@ -49,32 +47,13 @@ export default function Lightbox({ items, index, onClose, onPrev, onNext }) {
         ✕
       </button>
 
-      {cur.src ? (
-        <img
-          className="lb-img"
-          src={cur.src}
-          alt={cur.caption || ""}
-          onClick={(e) => e.stopPropagation()}
-        />
-      ) : (
-        <div
-          className="lb-img"
-          onClick={(e) => e.stopPropagation()}
-          style={{
-            width: "60vw",
-            height: "70vh",
-            background: "#f1f1f1",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontFamily: "var(--mono)",
-            fontSize: 12,
-            color: "#aeaeae",
-          }}
-        >
-          {cur.caption || "image"}
-        </div>
-      )}
+      <div className="lb-stage" onClick={(e) => e.stopPropagation()}>
+        {cur.src ? (
+          <img className="lb-img" src={cur.src} alt={cur.caption || ""} />
+        ) : (
+          <div className="lb-ph">{cur.caption || "image"}</div>
+        )}
+      </div>
 
       <div className="lb-bar" onClick={(e) => e.stopPropagation()}>
         <button

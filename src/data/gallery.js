@@ -4,7 +4,7 @@
 // so images don't jump as they load. Caption is optional.
 
 export const designs = [
-  { src: "", w: 1200, h: 1500, caption: "Booking UI" },
+  { src: "/gallery/designs/test.webp", w: 1200, h: 1500, caption: "Booking UI" },
   { src: "", w: 1600, h: 1000, caption: "Opal concept" },
   { src: "", w: 1200, h: 1200, caption: "Greenlite brand" },
   { src: "", w: 1400, h: 1050, caption: "Viewport UI" },
@@ -26,7 +26,7 @@ export const photos = [
 
 // Home page "Craft" strip — a short curated set of glimpses (UI only)
 export const craft = [
-  { src: "", w: 1200, h: 900, caption: "UI 01" },
+  { src: "gallery/designs/test.webp", w: 1200, h: 900, caption: "Sadharan Plate" },
   { src: "", w: 1200, h: 900, caption: "UI 02" },
   { src: "", w: 1200, h: 900, caption: "UI 03" },
   { src: "", w: 1200, h: 900, caption: "UI 04" },
