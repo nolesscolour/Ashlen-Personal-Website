@@ -32,6 +32,9 @@ export default function Floater() {
           <NavLink to="/" className={link} end>
             Home
           </NavLink>
+          <NavLink to="/work" className={link}>
+            Work
+          </NavLink>
           <NavLink to="/gallery" className={link}>
             Gallery
           </NavLink>

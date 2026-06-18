@@ -12,6 +12,7 @@ export default function Gallery() {
   const switchTab = (t) => {
     setTab(t);
     setLb(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (

@@ -14,8 +14,8 @@ export default function Project() {
           <section className="intro">
             <p>Project not found.</p>
             <p className="soft">
-              <Link className="inline-link" to="/">
-                Back home
+              <Link className="inline-link" to="/work">
+                Back to work
               </Link>
             </p>
           </section>
@@ -34,6 +34,13 @@ export default function Project() {
       <div className="wrap">
         <header className="head" style={{ paddingBottom: 0 }}>
           <div>
+            <Link
+              to="/work"
+              className="inline-link"
+              style={{ fontFamily: "var(--mono)", fontSize: 13, display: "inline-block", marginBottom: 18 }}
+            >
+              ← All work
+            </Link>
             <div className="name">{proj.title}</div>
             <div className="role" style={{ fontFamily: "var(--mono)", fontSize: 13 }}>
               {proj.type} · {proj.year} · {proj.role}

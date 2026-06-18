@@ -16,7 +16,7 @@ export const designs = [
 ];
 
 export const photos = [
-  { src: "", w: 1600, h: 1067, caption: "" },
+  { src: "/gallery/photos/diksha 1.webp", w: 1600, h: 1067, caption: "Diksha" },
   { src: "", w: 1067, h: 1600, caption: "" },
   { src: "", w: 1600, h: 1067, caption: "" },
   { src: "", w: 1200, h: 1200, caption: "" },

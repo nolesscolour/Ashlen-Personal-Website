@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
 import About from "./pages/About";
 import Writing from "./pages/Writing";
+import Work from "./pages/Work";
 import Project from "./pages/Project";
 import Post from "./pages/Post";
 import NotFound from "./pages/NotFound";
@@ -21,7 +22,7 @@ function ScrollTop() {
 export default function App() {
   const { pathname } = useLocation();
   const is404 =
-    !["/", "/gallery", "/about", "/writing"].includes(pathname) &&
+    !["/", "/gallery", "/about", "/writing", "/work"].includes(pathname) &&
     !pathname.startsWith("/writing/") &&
     !pathname.startsWith("/work/");
 
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/writing" element={<Writing />} />
         <Route path="/writing/:slug" element={<Post />} />
+        <Route path="/work" element={<Work />} />
         <Route path="/work/:slug" element={<Project />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
