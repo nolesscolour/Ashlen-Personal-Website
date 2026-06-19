@@ -863,3 +863,264 @@ footer img {
   .exp-co { white-space: normal; }
   .exp-lead { min-width: 16px; }
 }
+
+/* ======================================================
+   NAV — desktop: top bar + dropdown panel
+          mobile: bottom bar + fullscreen overlay
+   replaces the old .floater
+   ====================================================== */
+
+/* shell */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  pointer-events: none; /* let clicks through except on real controls */
+}
+
+/* the always-visible bar */
+.nav-bar {
+  pointer-events: auto;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding: 14px var(--gut) 0;
+}
+.nav-name {
+  display: flex;
+  align-items: center;
+  background: #ededed;
+  color: var(--ink);
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  padding: 12px 18px;
+}
+.nav-toggle {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  min-width: 220px;
+  border: 0;
+  cursor: pointer;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  padding: 12px 18px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-toggle-icon {
+  font-size: 18px;
+  line-height: 1;
+  width: 18px;
+  text-align: center;
+  flex: 0 0 auto;
+}
+/* open state: button turns red */
+.nav.open .nav-toggle {
+  background: #d8261c;
+  color: #fff;
+}
+
+/* the panel that holds links */
+.nav-panel {
+  pointer-events: auto;
+  position: absolute;
+  /* sits directly under the toggle button */
+  top: 100%;
+  /* align panel left edge with the toggle button's left edge:
+     name cell width + gut. Simpler: pin to the same gutter and offset. */
+  left: var(--gut);
+  margin-top: 0;
+  width: min(440px, calc(100% - var(--gut) * 2));
+  background: #0a0a0a;
+  color: var(--paper);
+  /* collapsed by default */
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.32s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.nav.open .nav-panel {
+  max-height: 80vh;
+}
+.nav-panel-inner {
+  padding: 28px 26px 24px;
+  display: flex;
+  flex-direction: column;
+  min-height: 420px;
+}
+
+/* links */
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.nav-link {
+  display: inline-block;
+  width: fit-content;
+  color: #f2f2f2;
+  font-size: 19px;
+  letter-spacing: -0.01em;
+  padding: 5px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.18s, color 0.18s;
+}
+.nav-link:hover {
+  border-bottom-color: #f2f2f2;
+}
+.nav-link.active {
+  border-bottom-color: #f2f2f2;
+}
+
+/* footer block: legal + socials, pinned to bottom of panel */
+.nav-foot {
+  margin-top: auto;
+  padding-top: 40px;
+}
+.nav-legal {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #8a8a8a;
+  margin-bottom: 18px;
+  max-width: 30ch;
+}
+.nav-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+.nav-socials a {
+  font-size: 14px;
+  color: #f2f2f2;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.18s;
+}
+.nav-socials a:hover {
+  border-bottom-color: #f2f2f2;
+}
+
+/* ----------- MOBILE: inset box, bar pinned inside its bottom ----------- */
+@media (max-width: 760px) {
+  /* the inset box itself — pinned bottom, grows up to full height when open */
+  .nav {
+    position: fixed;
+    left: var(--gut);
+    right: var(--gut);
+    bottom: var(--gut);
+    top: auto;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .nav.open {
+    top: var(--gut);
+  }
+
+  /* panel fills everything above the bar */
+  .nav-panel {
+    position: relative;
+    order: 1;
+    flex: 1 1 auto;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    width: auto;
+    background: var(--paper);
+    color: var(--ink);
+    border: 0;
+    overflow-y: auto;
+    pointer-events: auto;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s cubic-bezier(0.2,0.7,0.2,1), opacity 0.25s ease;
+  }
+  .nav.open .nav-panel {
+    max-height: none;
+    opacity: 1;
+  }
+
+  /* bar — flex row, fixed 48px, cells stretch */
+  .nav-bar {
+    order: 2;
+    position: relative;
+    z-index: 2;
+    pointer-events: auto;
+    flex: 0 0 48px;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    background: var(--paper);
+  }
+  .nav-name,
+  .nav-toggle {
+    margin: 0;
+    border: 0;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    padding: 0 18px;
+  }
+  .nav-name {
+    flex: 0 0 auto;
+    justify-content: flex-start;
+    background: #ededed;
+    color: var(--ink);
+  }
+  .nav-toggle {
+    flex: 1 1 auto;
+    min-width: 0;
+    justify-content: space-between;
+    gap: 12px;
+    background: var(--ink);
+    color: var(--paper);
+    cursor: pointer;
+  }
+  .nav.open .nav-toggle {
+    background: #d8261c;
+    color: #fff;
+  }
+
+  .nav-panel-inner {
+    padding: 28px var(--gut);
+    min-height: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-link {
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 26px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    padding: 10px 0;
+  }
+  .nav-link:hover,
+  .nav-link.active { border-bottom-color: var(--ink); }
+  .nav-legal { color: var(--ink-soft); }
+  .nav-socials a {
+    color: var(--ink);
+    font-family: var(--mono);
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+}
+/* ----------- give every page room so fixed bar never covers content ----------- */
+body {
+  padding-bottom: 90px;
+}
+@media (min-width: 761px) {
+  body {
+    padding-top: 72px;
+    padding-bottom: 0;
+  }
+}
