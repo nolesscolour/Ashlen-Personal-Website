@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import Floater from "./components/Floater";
+import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
@@ -40,7 +40,7 @@ export default function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       {!is404 && <Footer />}
-      {!is404 && <Floater />}
+      {!is404 && <Nav />}
     </>
   );
 }
