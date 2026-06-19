@@ -36,6 +36,7 @@ export default function Nav() {
 
   return (
     <div className={open ? "nav open" : "nav"}>
+      <div className="nav-scrim" onClick={() => setOpen(false)} />
       <div className="nav-bar">
         <Link to="/" className="nav-name" onClick={() => setOpen(false)}>
           Ashlen
