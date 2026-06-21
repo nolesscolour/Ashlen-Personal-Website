@@ -1146,5 +1146,5 @@ body {
   pointer-events: none;
 }
 @media (pointer: fine) {
-  body { cursor: none; }
+  *, *::before, *::after { cursor: none !important; }
 }

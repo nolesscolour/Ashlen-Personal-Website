@@ -10,7 +10,9 @@ import Work from "./pages/Work";
 import Project from "./pages/Project";
 import Post from "./pages/Post";
 import NotFound from "./pages/NotFound";
+import Experiments from "./pages/Experiments";
 import PixelCursor from "./components/PixelCursor";
+
 
 function ScrollTop() {
   const { pathname } = useLocation();
@@ -23,7 +25,7 @@ function ScrollTop() {
 export default function App() {
   const { pathname } = useLocation();
   const is404 =
-    !["/", "/gallery", "/about", "/writing", "/work"].includes(pathname) &&
+    !["/", "/gallery", "/about", "/writing", "/work", "/experiments"].includes(pathname) &&
     !pathname.startsWith("/writing/") &&
     !pathname.startsWith("/work/");
 
@@ -38,11 +40,13 @@ export default function App() {
         <Route path="/writing/:slug" element={<Post />} />
         <Route path="/work" element={<Work />} />
         <Route path="/work/:slug" element={<Project />} />
+        <Route path="/experiments" element={<Experiments />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       {!is404 && <Footer />}
       {!is404 && <Nav />}
       <PixelCursor />
+      
     </>
   );
 }

@@ -1,13 +1,13 @@
 import { useEffect, useRef } from "react";
-const SIZE = 10;
-const TRAIL = 40;
-const STEP = 5;
+const SIZE = 16;
+const TRAIL = 50;
+const STEP = 7;
 const TAIL_MIN = 2;
 const HUE_PER_MS = 0.12;
 const LIFE = 300;
 const SPARK_LIFE = 350;     // particle lifespan ms
 const SPARK_CHANCE = 0.8;   // chance to spawn a spark per trail drop
-const SPARK_SPREAD = 14;    // how far sparks scatter from the trail (px)
+const SPARK_SPREAD = 18;    // how far sparks scatter from the trail (px)
 export default function PixelCursor() {
   const canvasRef = useRef(null);
   const pos = useRef({ x: -100, y: -100 });
@@ -17,6 +17,7 @@ export default function PixelCursor() {
   const hue = useRef(0);
   const raf = useRef(0);
   const seen = useRef(false);
+  const onTarget = useRef(false);
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -35,6 +36,7 @@ export default function PixelCursor() {
     const onMove = (e) => {
       pos.current.x = e.clientX;
       pos.current.y = e.clientY;
+      onTarget.current = !!(e.target.closest && e.target.closest("a, button, [role=button], .tile, .mitem"));
       if (!seen.current) {
         seen.current = true;
         last.current.x = e.clientX;
@@ -45,6 +47,7 @@ export default function PixelCursor() {
     const loop = (now) => {
       const dt = now - prev;
       prev = now;
+      
       hue.current = (hue.current + dt * HUE_PER_MS) % 360;
       const dx = pos.current.x - last.current.x;
       const dy = pos.current.y - last.current.y;
@@ -96,8 +99,8 @@ export default function PixelCursor() {
         ctx.fillRect(sq.x - size / 2, sq.y - size / 2, size, size);
       }
       if (seen.current) {
-        ctx.fillStyle = "#111111";
-        ctx.fillRect(pos.current.x - SIZE / 2, pos.current.y - SIZE / 2, SIZE, SIZE);
+        ctx.fillStyle = onTarget.current ? "#00ff66" : "#111111";
+        ctx.fillRect(pos.current.x - SIZE / 2, pos.current.y - SIZE / 2, SIZE, SIZE);;
       }
       raf.current = requestAnimationFrame(loop);
     };

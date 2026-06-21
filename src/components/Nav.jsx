@@ -7,6 +7,7 @@ const pages = [
   { to: "/gallery", label: "Gallery" },
   { to: "/about", label: "About" },
   { to: "/writing", label: "Writing" },
+  { to: "/experiments", label: "Experiments" },
 ];
 
 const socials = [
