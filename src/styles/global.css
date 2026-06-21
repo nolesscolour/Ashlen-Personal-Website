@@ -481,6 +481,9 @@ footer img {
   max-width: 100%;
   margin-inline: auto;
   padding: 14px var(--gut);
+  min-height: 75px;
+  display: flex;
+  align-items: center;
 }
 .gal-grid {
   width: 100%;
@@ -505,8 +508,7 @@ footer img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(255, 255, 255, 0.86);
-  backdrop-filter: blur(2px);
+  background: rgba(255, 255, 255, 0.96);
   animation: lbfade 0.22s ease;
   padding: 64px 20px 24px;
 }
@@ -650,6 +652,7 @@ footer img {
   max-width: 100%;
   margin-inline: auto;
   padding: 14px var(--gut);
+  min-height: 75px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -882,22 +885,33 @@ footer img {
 
 /* the always-visible bar */
 .nav-bar {
-  pointer-events: auto;
+  pointer-events: none;
   position: relative;
   z-index: 3;
   display: flex;
+  justify-content: center;
   align-items: stretch;
   gap: 0;
-  padding: 14px var(--gut) 0;
+  padding: 14px var(--gut) 14px;
+}
+.nav-name,
+.nav-toggle {
+  pointer-events: auto;
 }
 .nav-name {
   display: flex;
   align-items: center;
-  background: #ededed;
-  color: var(--ink);
+  background: hsl(0, 70%, 55%);
+  color: hsl(180, 70%, 92%);
   font-size: 15px;
   letter-spacing: -0.01em;
   padding: 12px 18px;
+  animation: navNameHue 3s linear infinite;
+}
+@keyframes navNameHue {
+  to {
+    filter: hue-rotate(360deg);
+  }
 }
 .nav-toggle {
   flex: 0 0 auto;
@@ -929,23 +943,6 @@ footer img {
   color: #fff;
 }
 
-/* blur scrim — eases in on open, out on close */
-.nav-scrim {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0;
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(3px);
-  transition: opacity 0.3s ease;
-  will-change: opacity;
-}
-.nav.open .nav-scrim {
-  opacity: 1;
-  pointer-events: auto;
-}
-
 /* the panel that holds links */
 .nav-panel {
   pointer-events: auto;
@@ -953,10 +950,9 @@ footer img {
   z-index: 2;
   /* sits directly under the toggle button */
   top: 100%;
-  /* align panel left edge with the toggle button's left edge:
-     name cell width + gut. Simpler: pin to the same gutter and offset. */
-  left: var(--gut);
-  margin-top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: -14px;
   width: 301.68px;
   background: #0a0a0a;
   color: var(--paper);
@@ -966,13 +962,13 @@ footer img {
   transition: max-height 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .nav.open .nav-panel {
-  max-height: calc(100vh - 14px - 47px - var(--gut));
+  max-height: 520px;
 }
 .nav-panel-inner {
   padding: 28px 26px 24px;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 14px - 47px - var(--gut));
+  min-height: 520px;
 }
 
 /* links */
@@ -1145,4 +1141,14 @@ body {
     padding-top: 72px;
     padding-bottom: 0;
   }
+}
+/* ----------- pixel cursor ----------- */
+.pixel-cursor {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+@media (pointer: fine) {
+  body { cursor: none; }
 }

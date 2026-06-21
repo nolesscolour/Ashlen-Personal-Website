@@ -23,7 +23,11 @@ function ListIcon() {
 }
 
 export default function Work() {
-  const [view, setView] = useState("grid"); // grid | list
+  const [view, setViewRaw] = useState("grid"); // grid | list
+  const setView = (v) => {
+    setViewRaw(v);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   const [hover, setHover] = useState(null);  // slug of hovered list row
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const wrapRef = useRef(null);

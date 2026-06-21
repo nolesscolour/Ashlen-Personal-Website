@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useRef } from "react";
 
 // items: array of { src, caption }
 // index: current index (number) or null when closed
@@ -38,6 +38,18 @@ export default function Lightbox({ items, index, onClose, onPrev, onNext }) {
     });
   }, [open, index, items]);
 
+  const dragX = useRef(null);
+  const THRESHOLD = 50;
+
+  const startDrag = (x) => { dragX.current = x; };
+  const endDrag = (x) => {
+    if (dragX.current === null) return;
+    const dx = x - dragX.current;
+    dragX.current = null;
+    if (dx <= -THRESHOLD) onNext();
+    else if (dx >= THRESHOLD) onPrev();
+  };
+
   if (!open) return null;
   const cur = items[index];
 
@@ -47,7 +59,15 @@ export default function Lightbox({ items, index, onClose, onPrev, onNext }) {
         ✕
       </button>
 
-      <div className="lb-stage" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="lb-stage"
+        onClick={(e) => e.stopPropagation()}
+        onTouchStart={(e) => startDrag(e.touches[0].clientX)}
+        onTouchEnd={(e) => endDrag(e.changedTouches[0].clientX)}
+        onMouseDown={(e) => startDrag(e.clientX)}
+        onMouseUp={(e) => endDrag(e.clientX)}
+        onMouseLeave={() => { dragX.current = null; }}
+      >
         {cur.src ? (
           <img className="lb-img" src={cur.src} alt={cur.caption || ""} />
         ) : (

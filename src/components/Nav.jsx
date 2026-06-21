@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 const pages = [
-  { to: "/work", label: "Index" },
   { to: "/", label: "Home", end: true },
   { to: "/work", label: "Work" },
   { to: "/gallery", label: "Gallery" },
@@ -36,7 +35,6 @@ export default function Nav() {
 
   return (
     <div className={open ? "nav open" : "nav"}>
-      <div className="nav-scrim" onClick={() => setOpen(false)} />
       <div className="nav-bar">
         <Link to="/" className="nav-name" onClick={() => setOpen(false)}>
           Ashlen

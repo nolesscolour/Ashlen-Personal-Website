@@ -10,6 +10,7 @@ import Work from "./pages/Work";
 import Project from "./pages/Project";
 import Post from "./pages/Post";
 import NotFound from "./pages/NotFound";
+import PixelCursor from "./components/PixelCursor";
 
 function ScrollTop() {
   const { pathname } = useLocation();
@@ -41,6 +42,7 @@ export default function App() {
       </Routes>
       {!is404 && <Footer />}
       {!is404 && <Nav />}
+      <PixelCursor />
     </>
   );
 }
