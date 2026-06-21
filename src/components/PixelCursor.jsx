@@ -20,6 +20,7 @@ export default function PixelCursor() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    if (!window.matchMedia("(pointer: fine)").matches) return;
     const ctx = canvas.getContext("2d");
     let dpr = Math.max(1, window.devicePixelRatio || 1);
     const resize = () => {

@@ -1021,58 +1021,57 @@ footer img {
   border-bottom-color: #f2f2f2;
 }
 
-/* ----------- MOBILE: inset box, bar pinned inside its bottom ----------- */
+/* ----------- MOBILE: bottom bar, full content width, sheet opens upward ----------- */
 @media (max-width: 760px) {
-  /* the inset box itself — pinned bottom, grows up to full height when open */
   .nav {
     position: fixed;
     left: var(--gut);
     right: var(--gut);
     bottom: var(--gut);
     top: auto;
+    z-index: 60;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     background: transparent;
     pointer-events: none;
-    overflow: hidden;
-  }
-  .nav.open {
-    top: var(--gut);
   }
 
-  /* panel fills everything above the bar */
+  /* sheet: collapsed when closed, grows upward when open */
   .nav-panel {
-    position: relative;
     order: 1;
-    flex: 1 1 auto;
+    position: relative;
     left: auto;
     right: auto;
     top: auto;
     bottom: auto;
     width: auto;
+    transform: none;
+    margin: 0;
     background: #0a0a0a;
     color: var(--paper);
     border: 0;
-    overflow-y: auto;
-    pointer-events: auto;
-    opacity: 0;
+    overflow: hidden;
+    max-height: 0;
+    min-height: 0;
+    transition: max-height 0.34s cubic-bezier(0.2, 0.7, 0.2, 1);
     pointer-events: none;
-    transform: translateY(8px);
-    transition: opacity 0.28s ease, transform 0.28s ease;
+  }
+  .nav.open {
+    top: var(--gut);
   }
   .nav.open .nav-panel {
-    opacity: 1;
+    flex: 1 1 auto;
+    max-height: none;
+    overflow-y: auto;
     pointer-events: auto;
-    transform: translateY(0);
   }
 
-  /* bar — flex row, fixed 48px, cells stretch */
+  /* bar: full width, 48px, at the bottom */
   .nav-bar {
     order: 2;
-    position: relative;
-    z-index: 2;
-    pointer-events: auto;
     flex: 0 0 48px;
+    pointer-events: auto;
     display: flex;
     padding: 0;
     margin: 0;
@@ -1090,8 +1089,6 @@ footer img {
   .nav-name {
     flex: 0 0 auto;
     justify-content: flex-start;
-    background: #ededed;
-    color: var(--ink);
   }
   .nav-toggle {
     flex: 1 1 auto;
@@ -1110,7 +1107,6 @@ footer img {
   .nav-panel-inner {
     padding: 28px var(--gut);
     min-height: 100%;
-    height: auto;
     display: flex;
     flex-direction: column;
   }
@@ -1132,14 +1128,14 @@ footer img {
     font-size: 13px;
   }
 }
-/* ----------- give every page room so fixed bar never covers content ----------- */
+/* ----------- give every page room so the fixed bar never covers content ----------- */
 body {
-  padding-bottom: 90px;
+  padding-top: 72px;
 }
-@media (min-width: 761px) {
+@media (max-width: 760px) {
   body {
-    padding-top: 72px;
-    padding-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 90px;
   }
 }
 /* ----------- pixel cursor ----------- */
