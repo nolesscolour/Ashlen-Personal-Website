@@ -7,13 +7,14 @@ import Lightbox from "../components/Lightbox";
 import { projects } from "../data/projects";
 import { craft } from "../data/gallery";
 import ContactForm from "../components/ContactForm";
+import ExperienceAccordion from "../components/ExperienceAccordion";
 
 const experience = [
-  { company: "Condé Nast", role: "Product Design", year: "2024—now" },
-  { company: "Ecole Intuit Lab", role: "Visual Design", year: "2023—24" },
-  { company: "Konnect Box", role: "Brand & UI", year: "2022—23" },
-  { company: "Curiosify", role: "Design Lead", year: "2021—22" },
-  { company: "Alliance Française", role: "Graphic Design", year: "2020—21" },
+  { company: "Condé Nast", type: "Publishing", start: "Jan 2024", end: "Present", photo: "", detail: ["Placeholder line one about the role and what it involved.", "Placeholder line two covering scope, team, and what shipped.", "Placeholder line three with an outcome or highlight.", "Placeholder line four, optional."] },
+  { company: "Ecole Intuit Lab", type: "Design School", start: "Mar 2023", end: "Dec 2023", photo: "", detail: ["Placeholder line one about the role and what it involved.", "Placeholder line two covering scope, team, and what shipped.", "Placeholder line three with an outcome or highlight."] },
+  { company: "Konnect Box", type: "Agency", start: "Jun 2022", end: "Feb 2023", photo: "", detail: ["Placeholder line one about the role and what it involved.", "Placeholder line two covering scope, team, and what shipped.", "Placeholder line three with an outcome or highlight."] },
+  { company: "Curiosify", type: "Startup", start: "Apr 2021", end: "May 2022", photo: "", detail: ["Placeholder line one about the role and what it involved.", "Placeholder line two covering scope, team, and what shipped.", "Placeholder line three with an outcome or highlight."] },
+  { company: "Alliance Française", type: "Cultural", start: "Jan 2020", end: "Mar 2021", photo: "", detail: ["Placeholder line one about the role and what it involved.", "Placeholder line two covering scope, team, and what shipped.", "Placeholder line three with an outcome or highlight."] },
 ];
 
 export default function Home() {
@@ -73,16 +74,26 @@ export default function Home() {
         <section className="index">
           <div className="label">
             <span>Projects</span>
+            <Link className="view-all" to="/work">View more</Link>
           </div>
-          {projects.map((p) => (
-            <Row
-              key={p.slug}
-              year={p.year}
-              title={p.title}
-              meta={p.type}
-              to={`/work/${p.slug}`}
-            />
-          ))}
+          <div className="home-projects">
+            {projects.slice(0, 3).map((p) => (
+              <Link className="work-tile" to={`/work/${p.slug}`} key={p.slug}>
+                {p.images[0]?.src ? (
+                  <img src={p.images[0].src} alt={p.images[0].alt || p.title} className="work-cover" />
+                ) : (
+                  <div className="work-cover work-ph">{p.title}</div>
+                )}
+                <div className="work-info">
+                  <div className="work-ttl">{p.title}</div>
+                  <div className="work-pills">
+                    <span className="pill">{p.type}</span>
+                    <span className="pill">{p.year}</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </section>
 
         {/* experience */}
@@ -90,14 +101,7 @@ export default function Home() {
           <div className="label">
             <span>Experience</span>
           </div>
-          {experience.map((e) => (
-            <div className="exp-row" key={e.company}>
-              <span className="exp-yr">{e.year}</span>
-              <span className="exp-co">{e.company}</span>
-              <span className="exp-lead" />
-              <span className="exp-role">{e.role}</span>
-            </div>
-          ))}
+          <ExperienceAccordion items={experience} />
         </section>
 
         <section className="contact">

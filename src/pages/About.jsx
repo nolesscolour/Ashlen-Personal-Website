@@ -1,10 +1,11 @@
 import Frame from "../components/Frame";
 import Row from "../components/Row";
 import ContactForm from "../components/ContactForm";
+import ExperienceAccordion from "../components/ExperienceAccordion";
 
 const experience = [
-  { year: "2024", role: "Designer", org: "TII" },
-  { year: "2024", role: "Founder", org: "Sadharan Studio" },
+  { company: "Sadharan Studio", type: "Founder", start: "Jan 2024", end: "Present", photo: "", detail: ["Placeholder line one about founding the studio and what it does.", "Placeholder line two covering clients, focus, and approach.", "Placeholder line three with a highlight or direction."] },
+  { company: "TII", type: "Designer", start: "Jan 2024", end: "Present", photo: "", detail: ["Placeholder line one about the role and what it involved.", "Placeholder line two covering scope, team, and what shipped.", "Placeholder line three with an outcome or highlight."] },
 ];
 
 export default function About() {
@@ -36,9 +37,7 @@ export default function About() {
           <div className="label">
             <span>Experience</span>
           </div>
-          {experience.map((e, i) => (
-            <Row key={i} year={e.year} title={e.org} meta={e.role} />
-          ))}
+          <ExperienceAccordion items={experience} />
         </section>
 
         <section>
