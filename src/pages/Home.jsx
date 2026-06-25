@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Frame from "../components/Frame";
 import Row from "../components/Row";
@@ -17,8 +17,16 @@ const experience = [
   { company: "Alliance Française", type: "Cultural", start: "Jan 2020", end: "Mar 2021", photo: "", detail: ["Placeholder line one about the role and what it involved.", "Placeholder line two covering scope, team, and what shipped.", "Placeholder line three with an outcome or highlight."] },
 ];
 
+const heroGifs = ["/brand/Herogif.GIF", "/brand/Herogif2.GIF"];
+
 export default function Home() {
   const [lb, setLb] = useState(null);
+  const [gif, setGif] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setGif((g) => (g + 1) % heroGifs.length), 5000);
+    return () => clearInterval(id);
+  }, []);
   const close = () => setLb(null);
   const prev = () => setLb((i) => (i - 1 + craft.length) % craft.length);
   const next = () => setLb((i) => (i + 1) % craft.length);
@@ -27,34 +35,29 @@ export default function Home() {
     <>
       <Frame />
       <div className="wrap">
-        <header className="head">
-          <div>
-            <div className="name">Ashlen</div>
-            <div className="role">Designer</div>
+        <section className="hero-card">
+          <div className="hero-visual">
+            {heroGifs.map((src, i) => (
+              <img key={i} src={src} alt="" className="hero-gif" style={{ opacity: gif === i ? 1 : 0 }} />
+            ))}
           </div>
-        </header>
-        <section className="intro">
-          <p>
-            I design interfaces and the systems around them, with the occasional
-            brand. I care about restraint, hierarchy, and the small decisions
-            most people scroll past. If you're building something and want a
-            design partner, reach out at{" "}
-            <a href="mailto:hi@ashlen.studio">hi@ashlen.studio</a>.
-          </p>
-          <p className="soft">
-            Based in Kolkata, working remotely. Background in marketing and
-            product.
-          </p>
-        </section>
-
-        {/* actions: resume + contact, sitting just before Craft */}
-        <section className="home-actions">
-          <a className="btn btn-solid" href="/resume.pdf" target="_blank" rel="noopener">
-            Download résumé
-          </a>
-          <a className="btn btn-outline" href="mailto:hi@ashlen.studio">
-            Get in touch
-          </a>
+          <div className="hero-info">
+            <div className="hero-head">
+              <div className="name">Ashlen</div>
+              <div className="role">Designer</div>
+            </div>
+            <p className="hero-bio">
+              I help early teams shape a first product, from naming it to shipping it.
+            </p>
+            <div className="hero-actions">
+              <a className="btn btn-solid" href="/resume.pdf" target="_blank" rel="noopener">
+                Download résumé
+              </a>
+              <a className="btn btn-outline" href="mailto:hi@ashlen.studio">
+                Get in touch
+              </a>
+            </div>
+          </div>
         </section>
       </div>
 

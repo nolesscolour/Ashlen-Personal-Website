@@ -8,6 +8,12 @@ export default function NotFound() {
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, []);
+
+  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -246,10 +252,10 @@ export default function NotFound() {
 }
 
 const wrap = {
-  position: "relative",
+  position: "fixed",
+  inset: 0,
   width: "100%",
   height: "100dvh",
-  minHeight: 560,
   background: "#FFFFFF",
   overflow: "hidden",
   userSelect: "none",
