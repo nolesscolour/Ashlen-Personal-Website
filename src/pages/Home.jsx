@@ -19,6 +19,19 @@ const experience = [
 
 const heroGifs = ["/brand/Herogif.GIF", "/brand/Herogif2.GIF"];
 
+const logos = [
+  { name: "Logo 1", src: "" },
+  { name: "Logo 2", src: "" },
+  { name: "Logo 3", src: "" },
+  { name: "Logo 4", src: "" },
+  { name: "Logo 5", src: "" },
+  { name: "Logo 6", src: "" },
+  { name: "Logo 7", src: "" },
+  { name: "Logo 8", src: "" },
+  { name: "Logo 9", src: "" },
+  { name: "Logo 10", src: "" },
+];
+
 export default function Home() {
   const [lb, setLb] = useState(null);
   const [gif, setGif] = useState(0);
@@ -47,7 +60,10 @@ export default function Home() {
               <div className="role">Designer</div>
             </div>
             <p className="hero-bio">
-              I help early teams shape a first product, from naming it to shipping it.
+              I design and build digital products, taming enterprise tools and the interfaces people use.
+            </p>
+            <p className="hero-coverage">
+              Product &amp; UX · Web design · Visual design
             </p>
             <div className="hero-actions">
               <a className="btn btn-solid" href="/resume.pdf" target="_blank" rel="noopener">
@@ -57,6 +73,20 @@ export default function Home() {
                 Get in touch
               </a>
             </div>
+          </div>
+        </section>
+
+        <section className="logos">
+          <div className="logo-grid">
+            {logos.map((l, i) => (
+              <div className="logo-cell" key={i}>
+                {l.src ? (
+                  <img src={l.src} alt={l.name} className="logo-img" />
+                ) : (
+                  <span className="logo-ph">{l.name}</span>
+                )}
+              </div>
+            ))}
           </div>
         </section>
       </div>
