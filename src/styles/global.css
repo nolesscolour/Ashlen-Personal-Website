@@ -1212,7 +1212,7 @@ body {
 @media (max-width: 760px) {
   body {
     padding-top: 0;
-    padding-bottom: 90px;
+    padding-bottom: 120px;
   }
 }
 /* ----------- pixel cursor ----------- */
@@ -1412,7 +1412,18 @@ body {
     margin-top: clamp(24px, 4vh, 52px);
   }
   .hero-visual {
-    height: 300px;
+    height: 260px;
+  }
+  .hero-bio {
+    font-size: 18px;
+    margin-top: 18px;
+  }
+  .hero-coverage {
+    font-size: 13px;
+    margin-top: 12px;
+  }
+  .hero-actions {
+    margin-top: 24px;
   }
 }
 /* ---------- home: logo wall ---------- */
