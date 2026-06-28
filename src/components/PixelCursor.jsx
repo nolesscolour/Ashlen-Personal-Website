@@ -33,10 +33,12 @@ export default function PixelCursor() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     resize();
+    const moved = { current: true };
     const onMove = (e) => {
       pos.current.x = e.clientX;
       pos.current.y = e.clientY;
       onTarget.current = !!(e.target.closest && e.target.closest("a, button, [role=button], .tile, .mitem"));
+      moved.current = true;
       if (!seen.current) {
         seen.current = true;
         last.current.x = e.clientX;
@@ -44,10 +46,20 @@ export default function PixelCursor() {
       }
     };
     let prev = performance.now();
+    let dirty = true;
     const loop = (now) => {
       const dt = now - prev;
       prev = now;
-      
+
+      // anything to animate? if not, idle without repainting
+      const busy = moved.current || trail.current.length > 0 || sparks.current.length > 0;
+      if (!busy && !dirty) {
+        raf.current = requestAnimationFrame(loop);
+        return;
+      }
+      moved.current = false;
+      dirty = trail.current.length > 0 || sparks.current.length > 0;
+
       hue.current = (hue.current + dt * HUE_PER_MS) % 360;
       const dx = pos.current.x - last.current.x;
       const dy = pos.current.y - last.current.y;
