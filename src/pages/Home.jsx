@@ -103,14 +103,14 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="wrap">
-        <section className="index">
+      <section className="set set-wide">
+        <div className="set-inner">
           <div className="label">
             <span>Projects</span>
             <Link className="view-all" to="/work">View more</Link>
           </div>
-          <div className="home-projects">
-            {projects.slice(0, 3).map((p) => (
+          <div className="home-projects-grid">
+            {projects.slice(0, 4).map((p) => (
               <Link className="work-tile" to={`/work/${p.slug}`} key={p.slug}>
                 {p.images[0]?.src ? (
                   <img src={p.images[0].src} alt={p.images[0].alt || p.title} className="work-cover" />
@@ -127,8 +127,10 @@ export default function Home() {
               </Link>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
+      <div className="wrap">
         {/* experience */}
         <section className="index">
           <div className="label">

@@ -1538,3 +1538,25 @@ body {
     gap: 20px 24px;
   }
 }
+/* ---------- home: projects 2-col grid ---------- */
+.home-projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 3vw, 48px);
+  margin-inline: calc(var(--gut) * -1);
+}
+@media (max-width: 760px) {
+  .home-projects-grid {
+    grid-template-columns: 1fr;
+    margin-inline: 0;
+  }
+}
+/* projects grid: bleed out by one gut each side to match the craft strip edges */
+.home-projects-grid {
+  margin-inline: calc(var(--gut) * -1);
+}
+@media (max-width: 760px) {
+  .home-projects-grid {
+    margin-inline: 0;
+  }
+}
