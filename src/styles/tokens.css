@@ -10,6 +10,8 @@
   --col: 720px;
   --col-wide: 1100px; /* gallery uses a wider measure */
   --gut: clamp(20px, 5vw, 64px);
+  --nav-h: 64px;
+  --ink-muted: #6b6b6b; /* passes AA on white, unlike --ink-soft */
 
   --sans: "DM Sans", system-ui, sans-serif;
   --mono: "DM Mono", monospace;

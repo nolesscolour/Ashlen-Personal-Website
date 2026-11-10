@@ -1,18 +1,14 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
 import About from "./pages/About";
-import Writing from "./pages/Writing";
 import Work from "./pages/Work";
 import Project from "./pages/Project";
-import Post from "./pages/Post";
 import NotFound from "./pages/NotFound";
-import Experiments from "./pages/Experiments";
 import PixelCursor from "./components/PixelCursor";
-
 
 function ScrollTop() {
   const { pathname } = useLocation();
@@ -22,31 +18,32 @@ function ScrollTop() {
   return null;
 }
 
-export default function App() {
-  const { pathname } = useLocation();
-  const is404 =
-    !["/", "/gallery", "/about", "/writing", "/work", "/experiments"].includes(pathname) &&
-    !pathname.startsWith("/writing/") &&
-    !pathname.startsWith("/work/");
+// every real page gets Nav and Footer; NotFound stays bare
+function Layout() {
+  return (
+    <>
+      <Nav />
+      <Outlet />
+      <Footer />
+    </>
+  );
+}
 
+export default function App() {
   return (
     <>
       <ScrollTop />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/writing" element={<Writing />} />
-        <Route path="/writing/:slug" element={<Post />} />
-        <Route path="/work" element={<Work />} />
-        <Route path="/work/:slug" element={<Project />} />
-        <Route path="/experiments" element={<Experiments />} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/work" element={<Work />} />
+          <Route path="/work/:slug" element={<Project />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/about" element={<About />} />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {!is404 && <Footer />}
-      {!is404 && <Nav />}
       <PixelCursor />
-      
     </>
   );
 }
