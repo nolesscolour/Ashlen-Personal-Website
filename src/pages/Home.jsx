@@ -17,7 +17,7 @@ const experience = [
   { company: "Alliance Française", type: "Cultural", start: "Jan 2020", end: "Mar 2021", photo: "", detail: ["Placeholder line one about the role and what it involved.", "Placeholder line two covering scope, team, and what shipped.", "Placeholder line three with an outcome or highlight."] },
 ];
 
-const heroGifs = ["/brand/Herogif.GIF", "/brand/Herogif2.GIF"];
+const heroGifs = ["/brand/Herogif.GIF"];
 
 const logos = [
   { name: "Logo 1", src: "" },
